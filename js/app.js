@@ -6,6 +6,8 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+    this.x = 30;
+    this.y = 60;
 };
 
 // Update the enemy's position, required method for game
@@ -30,9 +32,15 @@ Enemy.prototype.render = function() {
 
 var Player = function() {
   this.sprite = 'images/char-pink-girl.png';
+  this.x = 200;
+  this.y = 400;
 };
 
 Player.prototype.update = function(dt) {
+  console.log("update");
+};
+
+Player.prototype.handleInput = function(dt) {
 
 };
 
@@ -45,7 +53,7 @@ Player.prototype.render = function() {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [new Enemy(), new Enemy(), new Enemy()];
-var player = Player;
+var player = new Player();
 
 
 // This listens for key presses and sends the keys to your
