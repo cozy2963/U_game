@@ -1,14 +1,36 @@
+// Variables applied to each of our instances go here,
+// we've provided one for you to get started
+
+// The image/sprite for our enemies, this uses
+// a helper we've provided to easily load images
+var movers = function(x, y, image) {
+  this.sprite = image;
+  this.x = x;
+  this.y = y;
+};
+
+
 // Enemies our player must avoid
-var Enemy = function() {
+var getRandomInt = function(min, max) {
+  return Math.floor(Math.random() * (max-min)) + min;
+};
+
+var Enemy = function(x, y) {
+  movers.call(this, x, y, 'images/enemy-bug.png');
+  this.constructor = Enemy;
+  var speed = getRandomInt(1, 4);
+  this.speedMod = getRandomInt(1, speed);
+}
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-    this.x = 30;
-    this.y = 60;
-};
+    var movers = function(x, y, image) {
+      this.sprite = image;
+      this.x = x;
+      this.y = y;
+  };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
