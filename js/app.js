@@ -16,26 +16,33 @@ var getRandomInt = function(min, max) {
 };
 
 var Enemy = function(x, y) {
-  movers.call(this, x, y, 'images/enemy-bug.png');
-  this.constructor = Enemy;
-  var speed = getRandomInt(1, 4);
-  this.speedMod = getRandomInt(1, speed);
+  this.sprite = 'images/enemy-bug.png';
+  this.x = x;
+  this.y = y;
+  this.speed = 100;
+  // this.speed = getRandomInt(1, speed);
+  console.log(this);
+
 }
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    var movers = function(x, y, image) {
-      this.sprite = image;
-      this.x = x;
-      this.y = y;
-  };
+  //   var movers = function(x, y, image) {
+  //     this.sprite = image;
+  //     this.x = x;
+  //     this.y = y;
+  // };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 
 Enemy.prototype.update = function(dt) {
+  console.log('update');
+  console.log(this.speed);
+    this.x = this.x + 100;
+    console.log(this.x);
 
 
     // You should multiply any movement by the dt parameter
@@ -74,7 +81,7 @@ Player.prototype.render = function() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var allEnemies = [new Enemy(), new Enemy(), new Enemy()];
+var allEnemies = [new Enemy(-150, 130), new Enemy(-130, 250), new Enemy(-110, 350)];
 var player = new Player();
 
 
