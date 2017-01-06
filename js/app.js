@@ -15,12 +15,13 @@ var getRandomInt = function(min, max) {
   return Math.floor(Math.random() * (max-min)) + min;
 };
 
+var randomSpeed = getRandomInt(75, 250);
 var Enemy = function(x, y) {
   this.sprite = 'images/enemy-bug.png';
   this.x = x;
   this.y = y;
-  this.speed = 100;
-  // this.speed = getRandomInt(1, speed);
+  this.speed = getRandomInt(1, randomSpeed);
+
   console.log(this);
 
 }
@@ -39,9 +40,10 @@ var Enemy = function(x, y) {
 // Parameter: dt, a time delta between ticks
 
 Enemy.prototype.update = function(dt) {
-  console.log('update');
-  console.log(this.speed);
-    this.x = this.x + 100;
+    this.x = this.x + (this.speed * dt);
+      if(this.enemy === ) {
+
+      }
     console.log(this.x);
 
 
@@ -61,12 +63,13 @@ Enemy.prototype.render = function() {
 
 var Player = function() {
   this.sprite = 'images/char-pink-girl.png';
-  this.x = 200;
-  this.y = 400;
+  this.x = 0;
+  this.y = 0;
+  this.speed = 4;
 };
 
 Player.prototype.update = function(dt) {
-  console.log("update");
+
 };
 
 Player.prototype.handleInput = function(dt) {
@@ -81,7 +84,7 @@ Player.prototype.render = function() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var allEnemies = [new Enemy(-150, 130), new Enemy(-130, 250), new Enemy(-110, 350)];
+var allEnemies = [new Enemy(), new Enemy(), new Enemy(-510, 350)];
 var player = new Player();
 
 

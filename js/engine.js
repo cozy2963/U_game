@@ -29,12 +29,6 @@ var Engine = (function(global) {
     canvas.height = 606;
     doc.body.appendChild(canvas);
 
-    window.onload = function() {
-      animate(canvas, ctx);
-    };
-    function animate(canvas, ctx) {
-
-    };
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
      */
@@ -62,10 +56,7 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-        win.requestAnimationFrame(function() {
-          animate(canvas, ctx);
-        });
-
+        win.requestAnimationFrame(main);
     }
 
     /* This function does some initial setup that should only occur once,
