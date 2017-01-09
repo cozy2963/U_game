@@ -40,8 +40,9 @@ var Enemy = function(x, y) {
 // Parameter: dt, a time delta between ticks
 
 Enemy.prototype.update = function(dt) {
+  var ts = Math.round((new Date()).getTime() / 1000);
     this.x = this.x + (this.speed * dt);
-      if(this.enemy === ) {
+      if(this.enemy === ts) {
 
       }
     console.log(this.x);
@@ -65,7 +66,7 @@ var Player = function() {
   this.sprite = 'images/char-pink-girl.png';
   this.x = 0;
   this.y = 0;
-  this.speed = 4;
+  this.speed = 2;
 };
 
 Player.prototype.update = function(dt) {
