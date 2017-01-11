@@ -68,40 +68,38 @@ var Player = function() {
   this.x = 200;
   this.y = 400;
   this.speed = 2;
+
 };
 
 Player.prototype.update = function() {
-  // console.log('update');
-  if(this.x >400) {
-    this.x = 399;
-  }
-  if(this.x < 5) {
-    this.x = 6;
-  }
-  if(this.y > 400) {
-    this.y = 399;
-  }
-  if(this.y < -5) {
-    this.y = -4;
-  }
+
+};
+
+Player.prototype.collision = function() {
 
 };
 
 Player.prototype.handleInput = function(key) {
   switch (key) {
   case "up":
-    // console.log("playerUp");
     this.y = this.y - 15;
+    if(this.y < -5)
+      this.y = -4;
     break;
   case "down":
-  // console.log("down");
     this.y = this.y + 15;
+    if(this.y > 400)
+      this.y = 399;
     break;
   case "right":
     this.x = this.x + 15;
+    if(this.x >400)
+      this.x = 399;
     break;
     case "left":
       this.x = this.x - 15;
+      if(this.x < 5)
+        this.x = 6;
       break;
 }
 
