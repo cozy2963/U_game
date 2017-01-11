@@ -20,9 +20,9 @@ var Enemy = function(x, y) {
   this.sprite = 'images/enemy-bug.png';
   this.x = x;
   this.y = y;
-  this.speed = getRandomInt(1, randomSpeed);
+  this.speed = getRandomInt(50, randomSpeed);
 
-  console.log(this);
+  // console.log(this);
 
 }
     // Variables applied to each of our instances go here,
@@ -42,10 +42,11 @@ var Enemy = function(x, y) {
 Enemy.prototype.update = function(dt) {
   var ts = Math.round((new Date()).getTime() / 1000);
     this.x = this.x + (this.speed * dt);
-      if(this.enemy === ts) {
+      if(this.x > 505) {
+        this.x = 0;
 
       }
-    console.log(this.x);
+    // console.log(this.x);
 
 
     // You should multiply any movement by the dt parameter
@@ -64,16 +65,45 @@ Enemy.prototype.render = function() {
 
 var Player = function() {
   this.sprite = 'images/char-pink-girl.png';
-  this.x = 0;
-  this.y = 0;
+  this.x = 200;
+  this.y = 400;
   this.speed = 2;
 };
 
-Player.prototype.update = function(dt) {
+Player.prototype.update = function() {
+  // console.log('update');
+  if(this.x >400) {
+    this.x = 399;
+  }
+  if(this.x < 5) {
+    this.x = 6;
+  }
+  if(this.y > 400) {
+    this.y = 399;
+  }
+  if(this.y < -5) {
+    this.y = -4;
+  }
 
 };
 
-Player.prototype.handleInput = function(dt) {
+Player.prototype.handleInput = function(key) {
+  switch (key) {
+  case "up":
+    // console.log("playerUp");
+    this.y = this.y - 15;
+    break;
+  case "down":
+  // console.log("down");
+    this.y = this.y + 15;
+    break;
+  case "right":
+    this.x = this.x + 15;
+    break;
+    case "left":
+      this.x = this.x - 15;
+      break;
+}
 
 };
 
@@ -85,7 +115,7 @@ Player.prototype.render = function() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var allEnemies = [new Enemy(), new Enemy(), new Enemy(-510, 350)];
+var allEnemies = [new Enemy(-500, 75), new Enemy(-200, 225), new Enemy(-510, 300)];
 var player = new Player();
 
 
