@@ -3,11 +3,11 @@
 
 // The image/sprite for our enemies, this uses
 // a helper we've provided to easily load images
-var movers = function(x, y, image) {
-  this.sprite = image;
-  this.x = x;
-  this.y = y;
-};
+// var movers = function(x, y, image) {
+//   this.sprite = image;
+//   this.x = x;
+//   this.y = y;
+// };
 
 
 // Enemies our player must avoid
@@ -15,16 +15,37 @@ var getRandomInt = function(min, max) {
   return Math.floor(Math.random() * (max-min)) + min;
 };
 
-var randomSpeed = getRandomInt(75, 250);
+
 var Enemy = function(x, y) {
+var randomSpeed = getRandomInt(50, getRandomInt(75, 250));
   this.sprite = 'images/enemy-bug.png';
   this.x = x;
   this.y = y;
-  this.speed = getRandomInt(50, randomSpeed);
+  this.speed = getRandomInt(100, randomSpeed);
 
-  // console.log(this);
+};
 
+Enemy.prototype.collision = function(checkCollision) {
+this.x = {x: 5, y: 5, width: 50, height: 60};
+player.x = {x: 20, y: 10, width: 50, height: 60};
+
+  if (this.x < player.x + player.width &&
+   this.x + this.width > player.x &&
+   this.y < player.y + player.height &&
+   this.height + this.y > player.y) {
+     console.log('collision detected');
 }
+};
+  // if (5 < 30 &&
+  //   55 > 20 &&
+  //   5 < 20 &&
+  //   55 > 10) {
+  //   // collision detected!
+  //   console.log('collision detected');
+// }
+
+
+
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -40,7 +61,6 @@ var Enemy = function(x, y) {
 // Parameter: dt, a time delta between ticks
 
 Enemy.prototype.update = function(dt) {
-  var ts = Math.round((new Date()).getTime() / 1000);
     this.x = this.x + (this.speed * dt);
       if(this.x > 505) {
         this.x = 0;
@@ -67,37 +87,31 @@ var Player = function() {
   this.sprite = 'images/char-pink-girl.png';
   this.x = 200;
   this.y = 400;
-  this.speed = 2;
-
 };
 
 Player.prototype.update = function() {
 
 };
 
-Player.prototype.collision = function() {
-
-};
-
 Player.prototype.handleInput = function(key) {
   switch (key) {
   case "up":
-    this.y = this.y - 15;
-    if(this.y < -5)
-      this.y = -4;
+    this.y = this.y - 20;
+    if(this.y < -17)
+      this.y = -16;
     break;
   case "down":
-    this.y = this.y + 15;
+    this.y = this.y + 20;
     if(this.y > 400)
       this.y = 399;
     break;
   case "right":
-    this.x = this.x + 15;
+    this.x = this.x + 20;
     if(this.x >400)
       this.x = 399;
     break;
     case "left":
-      this.x = this.x - 15;
+      this.x = this.x - 20;
       if(this.x < 5)
         this.x = 6;
       break;
@@ -107,6 +121,11 @@ Player.prototype.handleInput = function(key) {
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    if(this.y <= 0) {
+      this.x = 200;
+      this.y = 400;
+      window.alert("You Win!\nPlay again!");
+    }
 };
 
 
