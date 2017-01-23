@@ -22,27 +22,30 @@ var randomSpeed = getRandomInt(50, getRandomInt(75, 250));
   this.x = x;
   this.y = y;
   this.speed = getRandomInt(100, randomSpeed);
-
 };
 
-Enemy.prototype.collision = function(checkCollision) {
-this.x = {x: 5, y: 5, width: 50, height: 60};
-player.x = {x: 20, y: 10, width: 50, height: 60};
+Enemy.prototype.collision = function() {
+var enemyBox = {x: this.x, y: this.y, width: 50, height: 60};
+var playerBox = {x: player.x, y: player.y, width: 50, height: 60};
 
-  if (this.x < player.x + player.width &&
-   this.x + this.width > player.x &&
-   this.y < player.y + player.height &&
-   this.height + this.y > player.y) {
+  if (enemyBox.x < playerBox.x + playerBox.width &&
+   enemyBox.x + enemyBox.width > playerBox.x &&
+   enemyBox.y < playerBox.y + playerBox.height &&
+   enemyBox.height + enemyBox.y > playerBox.y) {
      console.log('collision detected');
+
+     this.collision();
+     if (this.collision) {
+       console.log('dead');
+           // window.alert("Your DEAD! Try again!");
+           // player.x = 0;
+ };
 }
-};
-  // if (5 < 30 &&
-  //   55 > 20 &&
-  //   5 < 20 &&
-  //   55 > 10) {
-  //   // collision detected!
-  //   console.log('collision detected');
-// }
+}
+
+
+
+
 
 
 
@@ -72,8 +75,8 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-};
 
+};
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
